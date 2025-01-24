@@ -4,13 +4,13 @@ export type TAuthor = {
 }
 
 export type TPost = {
-    _id: string;
     title: string;
     slug: string;
     author: TAuthor;
     category: string;
+    category_slug: string;
     publishDate: string;
-    tags: [string]
+    tags: string[];
     content: string;
     readTime: string;
 }
