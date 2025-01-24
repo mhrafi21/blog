@@ -60,5 +60,4 @@ export const blogControllers = {
     getBlogById,
     updateBlog,
     deleteBlog,
- 
 }
