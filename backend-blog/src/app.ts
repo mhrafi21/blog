@@ -29,4 +29,4 @@ app.use(globalErrorHandler)
 
 app.all('*', allNotFound)
 
-export default app
+export default app;
