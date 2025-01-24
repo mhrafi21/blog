@@ -4,7 +4,8 @@ import express from "express"
 const router = express.Router();
 
 // Define a route
-router.get("/", categoryControllers.createCategory);
+router.post("/create", categoryControllers.createCategory);
+router.delete("/create", categoryControllers.de);
 
 
  export const categoryRoutes = router;
