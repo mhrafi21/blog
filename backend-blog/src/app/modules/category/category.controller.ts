@@ -24,22 +24,31 @@ const getCategory = catchAsync(async (req,res) => {
     })
 })
 
-co
-
-const deleteCategory = catchAsync(async(req,res)=>{
-    const result = await categoryServices.deleteCategoryFromDB(req.params.id);
+const updateCategory = catchAsync(async(req,res)=>{
+    const result = await categoryServices.updateCategoryIntoDB(req.params.id as string, req.body);
     sendResponse(res,{
         statusCode: HttpStatusCode.Ok,
         success: true,
-        message: "Category deleted successfully",
+        message: "Category updated successfully",
         data: result,
-    }),
+    })
+
 })
 
+const deleteCategory = catchAsync(async(req,res) => {
+    const result = await categoryServices.deleteCategoryFromDB(req.params.id as string);
+    sendResponse(res,{
+        statusCode: HttpStatusCode.NoContent,
+        success: true,
+        message: "Category deleted successfully",
+        data: result,
+    })
+})
 
  export const categoryControllers = {
     createCategory,
     getCategory,
+    updateCategory,
     deleteCategory
 }
 

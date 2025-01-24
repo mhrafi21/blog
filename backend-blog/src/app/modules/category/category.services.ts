@@ -17,7 +17,7 @@ const updateCategoryIntoDB = async (id:string, payload: Partial<CType>) => {
 }
 
 const deleteCategoryFromDB = async (id:string) => {
-    const result = await Category.findByIdAndDelete(id)
+    const result = await Category.findByIdAndDelete(id);
     return result;
 }
 
