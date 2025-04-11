@@ -15,6 +15,7 @@ const createBlog = catchAsync(async(req,res) => {
 })
 
 const getAllBlogs = catchAsync(async(req,res) => {
+ 
     const result = await blogServices.getAllBlogFromDB();
     sendResponse(res, {
         success: true,
@@ -25,13 +26,28 @@ const getAllBlogs = catchAsync(async(req,res) => {
 })
 
 const getBlogById = catchAsync(async(req,res) => {
-    const result = await blogServices.getBlogByIdFromDB(req.params.id as string);
+  
+    const result = await blogServices.getBlogByIdFromDB(req.params.slug as string);
+
     sendResponse(res, {
         success: true,
-        statusCode: httpStatus.CREATED,
+        statusCode: httpStatus.OK,
         message: "Single blog retried successfully",
         data: result,
        })
+})
+
+const getCategory = catchAsync(async(req,res) => {
+    const {category_slug} = req.params;
+    console.log(category_slug);
+    const result = await blogServices.getCategoryFromDB(category_slug as string);
+    sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Category retrieve Successfully",
+        data: result
+
+    })
 })
 
 const updateBlog = catchAsync(async(req,res) => {
@@ -58,6 +74,7 @@ export const blogControllers = {
     createBlog,
     getAllBlogs,
     getBlogById,
+    getCategory,
     updateBlog,
     deleteBlog,
 }

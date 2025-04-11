@@ -7,12 +7,17 @@ const createBlogIntoDB =  async(payload: TPost) => {
 }
 
 const getAllBlogFromDB = async() => {
-    const result = await Blog.find();
+   
+    const result = await Blog.find({});
     return result;
 }
 
-const getBlogByIdFromDB = async(id:string) => {
-    const result = await Blog.findById(id);
+const getBlogByIdFromDB = async(slug:string) => {
+    const result = await Blog.findOne({slug});
+    return result;
+}
+const getCategoryFromDB = async (category_slug : string) => {
+    const result = await Blog.find({category_slug});
     return result;
 }
 
@@ -33,6 +38,7 @@ export const blogServices = {
     createBlogIntoDB,
     getAllBlogFromDB,
     getBlogByIdFromDB,
+    getCategoryFromDB,
     updateBlogByIdIntoDB,
     deleteBlogByIdFromDB,
 }

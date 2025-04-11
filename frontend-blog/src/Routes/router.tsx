@@ -1,4 +1,5 @@
 
+import PostDetails from "@/components/PostDetails/PostDetails";
 import ErrorPage from "@/ErrorPage";
 import RootLayout from "@/Layout/RootLayout";
 import CategoryPage from "@/pages/categoryPage/CategoryPage";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path:"/category/:slug",
         Component: () => <CategoryPage />
+      },
+      {
+        path: "/post/:slug",
+        Component: () => <PostDetails />
       }
     ],
   },

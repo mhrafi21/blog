@@ -1,140 +1,85 @@
+// src/components/Navbar.tsx
+
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, NavLink } from "react-router";
-import ModeToggle from "./ModeToogle";
+import useCategory from "@/hooks/useCategory";
+import { CType } from "@/interface";
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const { data } = useCategory();
 
   return (
-    <header className="fixed left-0 right-0 top-0 h-[80px] dark:bgDark bg-white  dark:border shadow   z-50">
-      <nav className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 h-full flex items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link className="flex text-indigo-600 text-5xl font-extrabold" to={"/"}>
-           AR
-          </Link>
-        </motion.div>
+    <header className="sticky top-0 z-50 w-full border-b  bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container flex h-16  items-center justify-between px-4 mx-auto lg:px-8">
+        <Link to="/" className="text-xl font-bold">
+          The Learning stack
+        </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6">
-          {[
-            "Home",
-            "About",
-            "Services",
-            "Portfolio",
-            "Testimonial",
-            "Contact",
-            "Login"
-          ].map((item, index) => (
-            <NavLink
-            key={index}
-            to={item === "Home" ? "/" : `../${item.toLowerCase()}`}
-            className={({ isActive }) =>
-              `block font-medium md:text-lg transition ${
-                isActive ? "text-indigo-700" : "text-gray-600 dark:textGray200"
-              } hover:text-indigo-600`
-            }
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {item}
+        {/* Desktop Nav */}
+        <nav className="hidden space-x-6 lg:flex">
+          <NavLink to="/" className="hover:text-primary">
+            Home
           </NavLink>
-          ))}
-          {/* Dropdown Menu */}
-          <ModeToggle />
-        </div>
+          <NavLink to="/about" className="hover:text-primary">
+            About
+          </NavLink>
+          <NavLink to="/contact" className="hover:text-primary">
+            Contact
+          </NavLink>
+        </nav>
 
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className=" textGray700 focus:outline-none"
-          >
-            {isOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M6 6L18 18M6 18L18 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            ) : (
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              x="0px"
-              y="0px"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-gray-800 dark:fill-gray-200"
-            >
-              <path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"></path>
-            </svg>
-            
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0 }}
-          animate={{ height: "auto" }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden bg-white shadow-lg dark:bgDark"
-        >
-          <ul className="flex flex-col space-y-4 py-4 px-6">
-            {[
-              "Home",
-              "About",
-              "Services",
-              "Portfolio",
-              "Testimonial",
-              "Contact",
-              "Login"
-            ].map((item, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <NavLink
-                  to={item === "Home" ? "/" : `../${item.toLowerCase()}`}
-                  className={({ isActive }) =>
-                    `block font-medium md:text-lg transition ${
-                      isActive ? "text-indigo-700" : "text-gray-600 dark:textGray200"
-                    } hover:text-indigo-600`
-                  }
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  {item}
+        {/* Mobile Nav Toggle */}
+        <div className="lg:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Toggle Menu">
+                {open ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[260px] pt-10">
+              <nav className="flex flex-col space-y-4 text-lg">
+                <NavLink to="/" onClick={() => setOpen(false)}>
+                  Home
                 </NavLink>
-              </motion.li>
-            ))}
-            <ModeToggle />
-            
-          </ul>
-        </motion.div>
-      )}
+                <NavLink to="/about" onClick={() => setOpen(false)}>
+                  About
+                </NavLink>
+                <NavLink to="/contact" onClick={() => setOpen(false)}>
+                  Contact
+                </NavLink>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+      <div className="container border-b py-2 lg:hidden block mx-auto px-4 lg:px-8">
+       <div className="flex overflow-x-auto items-center justify-center">
+       {data?.map((cate: CType) => (
+          <NavLink
+            key={cate.slug}
+            to={`/category/${cate.slug}`}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md transition-colors text-sm font-medium
+                           ${
+                             isActive
+                               ? "bg-primary text-primary-foreground"
+                               : "hover:bg-muted"
+                           }`
+            }
+          >
+            {cate.name}
+          </NavLink>
+        ))}
+       </div>
+      </div>
     </header>
   );
 };

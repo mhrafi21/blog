@@ -1,9 +1,51 @@
-import React from 'react'
+import { PostCard } from '@/components/blog';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useParams } from 'react-router'; 
+import { Skeleton } from '@/components/ui/skeleton';
+
 
 const CategoryPage = () => {
-  return (
-    <div>CategoryPage</div>
-  )
-}
+  const { slug } = useParams();
 
-export default CategoryPage
+  const {
+    data,
+    error,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['categories-post', slug],
+    queryFn: async () => {
+      const response = await axios.get(
+        `http://localhost:5000/api/blogs/category/${slug}`
+      );
+      return response?.data?.data;
+    },
+    enabled: !!slug,
+  });
+
+  if (isError)
+    return (
+      <div className="text-center text-red-500 py-10">
+        Error: {error.message}
+      </div>
+    );
+
+  return (
+    <div className="grid grid-cols-1 gap-6">
+      {isLoading
+        ? Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="space-y-3">
+              <Skeleton className="h-48 w-full rounded-xl" />
+              <Skeleton className="h-5 w-3/4 rounded-md" />
+              <Skeleton className="h-4 w-1/2 rounded-md" />
+            </div>
+          ))
+        : data?.map((blog: any) => (
+            <PostCard key={blog.slug} post={blog} />
+          ))}
+    </div>
+  );
+};
+
+export default CategoryPage;

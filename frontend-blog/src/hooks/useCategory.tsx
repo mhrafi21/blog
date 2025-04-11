@@ -1,17 +1,20 @@
-import {  useMutation } from '@tanstack/react-query'
-import axios from "axios"
+import { useQuery } from '@tanstack/react-query';
+import axios from "axios";
+
+
+
 const useCategory = () => {
-    // Mutations
-   return useMutation({
-    mutationFn: async () =>  await axios.get('http://localhost:5000/api/category'),
-    onSuccess: (data) => {
-      console.log('Category added successfully:', data)
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await axios.get("http://localhost:5000/api/category");
+      return response?.data?.data;
     },
-    onError: (error) => {
-      console.error('Error adding category:', error)
-    }
-   })
+  });
 
-}
+    return {data, error,isLoading}
+  
+};
 
-export default useCategory
+export default useCategory;

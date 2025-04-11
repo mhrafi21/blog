@@ -7,7 +7,8 @@ const router = Router();
 
  router.post("/create", blogControllers.createBlog);
  router.get("/", blogControllers.getAllBlogs);
- router.get("/:id", blogControllers.getBlogById);
+ router.get("/category/:category_slug", blogControllers.getCategory);
+ router.get("/:slug", blogControllers.getBlogById);
  router.put("/:id", blogControllers.updateBlog);
  router.delete("/:id", blogControllers.deleteBlog);
 
