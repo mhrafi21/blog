@@ -1,24 +1,15 @@
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
-
+    const navigate = useNavigate();
   const handleSearch = () => {
-    const { data, isLoading, isError, error } = useQuery({
-        queryKey: ['blog-details', slug],
-        queryFn: async () => {
-          const res = await axios.get(
-            `http://localhost:5000/api/blogs/${slug}`
-          );
-          return res?.data?.data as TPost;
-        },
-        enabled: !!slug,
-      });
+   
     if (search.trim()) {
       // Handle search logic
-      
-      console.log("Searching for:", search);
+      navigate(`/search?q=${search}`)
     }
   };
 

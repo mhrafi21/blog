@@ -1,20 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
-import { NavLink } from "react-router";
 import { PostCard } from "@/components/blog";
+import { TPost } from "@/interface";
 
-export type TPost = {
-  title: string;
-  slug: string;
-  author: { name: string; bio: string };
-  category: string;
-  category_slug: string;
-  publishDate: string;
-  tags: string[];
-  content: string;
-  readTime: string;
-};
 
 export type TCategory = {
   name: string;
@@ -25,8 +14,8 @@ const Home = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["latest-posts"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/api/blogs");
-      return res.data.data;
+      const res = await axios.get("http://localhost:5000/api/blogs?page=1&limit=10");
+      return res?.data?.data?.data as TPost
     },
   });
 

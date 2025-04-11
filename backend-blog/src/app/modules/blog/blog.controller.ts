@@ -15,8 +15,8 @@ const createBlog = catchAsync(async(req,res) => {
 })
 
 const getAllBlogs = catchAsync(async(req,res) => {
- 
-    const result = await blogServices.getAllBlogFromDB();
+
+    const result = await blogServices.getAllBlogFromDB(req.query as unknown as { page: number; limit: number; search: string });
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.CREATED,
