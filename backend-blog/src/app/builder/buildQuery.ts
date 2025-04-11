@@ -8,11 +8,13 @@ export const buildQuery = ({
 
     if (search) {
         const words = search.trim().split(/\s+/);
-        console.log( words.join('|'))
+        console.log(words.join('|'))
         console.log(words)
         query.$or = [
             { title: search },
-            { title: { $regex: words.join('|'), $options: 'i' } }
+            { category: search },
+            { title: { $regex: words.join('|'), $options: 'i' } },
+            { category: { $regex: words.join('|'), $options: 'i' } }
         ];
     }
 

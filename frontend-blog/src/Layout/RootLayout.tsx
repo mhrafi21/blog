@@ -22,13 +22,13 @@ const RootLayout: React.FC = () => {
         </aside>
 
         {/* Main Content */}
-        <div className="lg:col-span-6 space-y-6">
+        <div className="lg:col-span-6 space-y-4">
           <Outlet />
         </div>
 
         {/* Right Sidebar */}
         <aside className="lg:col-span-3 hidden lg:block">
-          <div className="sticky top-[90px] space-y-6">
+          <div className="sticky top-[90px] space-y-4">
             <div>
               <h2 className="font-semibold text-lg">Search</h2>
               <SearchBar />

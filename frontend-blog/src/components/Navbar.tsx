@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, NavLink } from "react-router";
 import useCategory from "@/hooks/useCategory";
 import { CType } from "@/interface";
+import ModeToggle from "./ModeToogle";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden space-x-6 lg:flex">
+        <nav className="hidden space-x-6 lg:flex lg:items-center">
           <NavLink to="/" className="hover:text-primary">
             Home
           </NavLink>
@@ -30,6 +31,7 @@ const Navbar = () => {
           <NavLink to="/contact" className="hover:text-primary">
             Contact
           </NavLink>
+          <ModeToggle />
         </nav>
 
         {/* Mobile Nav Toggle */}
@@ -61,24 +63,24 @@ const Navbar = () => {
         </div>
       </div>
       <div className="container border-b py-2 lg:hidden block mx-auto px-4 lg:px-8">
-       <div className="flex overflow-x-auto items-center justify-center">
-       {data?.map((cate: CType) => (
-          <NavLink
-            key={cate.slug}
-            to={`/category/${cate.slug}`}
-            className={({ isActive }) =>
-              `block px-3 py-2 rounded-md transition-colors text-sm font-medium
+        <div className="flex overflow-x-auto items-center justify-center">
+          {data?.map((cate: CType) => (
+            <NavLink
+              key={cate.slug}
+              to={`/category/${cate.slug}`}
+              className={({ isActive }) =>
+                `block px-3 py-2 rounded-md transition-colors text-sm font-medium
                            ${
                              isActive
                                ? "bg-primary text-primary-foreground"
                                : "hover:bg-muted"
                            }`
-            }
-          >
-            {cate.name}
-          </NavLink>
-        ))}
-       </div>
+              }
+            >
+              {cate.name}
+            </NavLink>
+          ))}
+        </div>
       </div>
     </header>
   );
