@@ -9,7 +9,7 @@ import useCategory from "@/hooks/useCategory";
 import { CType } from "@/interface";
 import ModeToggle from "./ModeToogle";
 
-const Navbar = () => {
+const Navbar:React.FunctionComponent = () => {
   const [open, setOpen] = useState(false);
   const { data } = useCategory();
 

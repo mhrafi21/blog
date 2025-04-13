@@ -11,7 +11,7 @@ const SearchBlog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("q");
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["blog-details", search],
     queryFn: async () => {
       const res = await axios.get(

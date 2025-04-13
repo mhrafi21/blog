@@ -1,20 +1,17 @@
-import { PostCard } from '@/components/blog';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useParams } from 'react-router'; 
-import { Skeleton } from '@/components/ui/skeleton';
-
+import { PostCard } from "@/components/blog";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useParams } from "react-router";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const CategoryPage = () => {
   const { slug } = useParams();
 
   const {
     data,
-    error,
     isLoading,
-    isError,
   } = useQuery({
-    queryKey: ['categories-post', slug],
+    queryKey: ["categories-post", slug],
     queryFn: async () => {
       const response = await axios.get(
         `http://localhost:5000/api/blogs/category/${slug}`
@@ -34,9 +31,7 @@ const CategoryPage = () => {
               <Skeleton className="h-4 w-1/2 rounded-md" />
             </div>
           ))
-        : data?.map((blog: any) => (
-            <PostCard key={blog.slug} post={blog} />
-          ))}
+        : data?.map((blog: any) => <PostCard key={blog.slug} post={blog} />)}
     </div>
   );
 };

@@ -1,12 +1,13 @@
 import { ZodError } from 'zod'
 import AppError from '../errors/AppError'
 import { ErrorRequestHandler } from 'express'
-import { TErrorSources } from '../interface/error'
+
 import config from '../config'
 import handleZodError from '../errors/handleZodError'
 import handleCastError from '../errors/handleCastError'
 import handleDuplicateError from '../errors/handleDuplicateError'
 import handleValidationError from '../errors/handleValidationError'
+import { TErrorSources } from '../interface/error'
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   //setting default values
