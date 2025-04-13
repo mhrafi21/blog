@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
 import useCategory from "@/hooks/useCategory";
 import { CType } from "@/interface";
+import { Card } from "../ui/card";
 
 
 const Category: React.FC = () => {
@@ -24,13 +25,14 @@ const Category: React.FC = () => {
           <Skeleton className="h-5 w-1/2" />
         </div>
       ) : (
-        <div className="">
+        <Card>
+          <div className="h-screen">
           {data?.map((cate: CType) => (
             <NavLink
               key={cate.slug}
               to={`/category/${cate.slug}`}
               className={({ isActive }) =>
-                `block px-3 py-2 rounded-md transition-colors  font-medium
+                `block px-3 py-3 uppercase  transition-colors text-sm
                 ${isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`
               }
             >
@@ -38,6 +40,7 @@ const Category: React.FC = () => {
             </NavLink>
           ))}
         </div>
+        </Card>
       )}
     </div>
   );

@@ -1,154 +1,51 @@
-import React from "react";
-import Container from "./Container";
-import { Link } from "react-router";
-import Title from "./Title";
-import { FaAngleRight, FaFacebook, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <footer className="pt-20">
-      <div className="bgDark text-white py-10">
-      <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* About Section */}
-          <div>
-            <Title
-              subtitle="About Me"
-              textColor="mb-4 text-lg md:text-xl text-gray-100 "
-            />
-            <p className="textGray400 ">
-              I’m a passionate photographer capturing moments that last forever.
-              From intimate portraits to breathtaking landscapes, I bring
-              stories to life through my lens.
-            </p>
-          </div>
-
-          {/* Navigation Section */}
-          <div>
-            <Title
-              subtitle="Quick Links"
-              textColor="mb-4 text-lg md:text-xl text-gray-100"
-            />
-            <ul className="textGray400 space-y-2">
-              <li className="hover:text-[#3730a3] flex items-center transition">
-                <span>
-                  {" "}
-                  <FaAngleRight />
-                </span>
-                <Link to="/">Home</Link>
-              </li>
-              <li className="hover:text-[#3730a3] flex items-center transition">
-                <span>
-                  {" "}
-                  <FaAngleRight />
-                </span>
-                <Link to="/portfolio">Portfolio</Link>
-              </li>
-              <li className="hover:text-[#3730a3] flex items-center transition">
-                <span>
-                  {" "}
-                  <FaAngleRight />
-                </span>
-                <Link to="/services">Services</Link>
-              </li>
-              <li className="hover:text-[#3730a3] flex items-center transition">
-                <span>
-                  {" "}
-                  <FaAngleRight />
-                </span>
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Media Section */}
-          <div>
-            <Title
-              subtitle="Follow Me"
-              textColor="mb-4 text-lg md:text-xl text-gray-100"
-            />
-            <ul className="flex space-x-4">
-              <li>
-                <Link
-                  to="https://www.facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#3730a3] transition"
-                  aria-label="Facebook"
-                >
-                 <FaFacebook className="text-xl" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="https://www.whatsapp.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#3730a3] transition"
-                  aria-label="Instagram"
-                >
-                  <FaWhatsapp className="text-xl" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="https://www.twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#3730a3] transition"
-                  aria-label="Twitter"
-                >
-                 <FaTwitter  className="text-xl"/>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Section */}
-          <div>
-            <Title
-              subtitle="Contact"
-              textColor="mb-4 text-lg md:text-xl text-gray-100"
-            />
-            <ul className="text-gray-400 space-y-2">
-              <li>
-                Email:{" "}
-                <Link
-                  to="mailto:example@domain.com"
-                  className="hover:text-[#3730a3] transition"
-                >
-                  example@domain.com
-                </Link>
-              </li>
-              <li>
-                Phone:{" "}
-                <Link
-                  to="tel:+1234567890"
-                  className="hover:text-[#3730a3] transition"
-                >
-                  +1 234 567 890
-                </Link>
-              </li>
-              <li>Location: Malibaugh, Dhaka.</li>
-            </ul>
-          </div>
+    <footer className="bg-gray-950 text-gray-300 py-10 mt-16">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Logo & Description */}
+        <div>
+          <h2 className="text-2xl font-bold text-white">My Blog</h2>
+          <p className="mt-3 text-sm text-gray-400">
+            Sharing insights, tutorials, and thoughts on web development, tech, and life.
+          </p>
         </div>
 
-        <div className="text-center mt-8 text-gray-500 text-sm">
-          © {new Date().getFullYear()} Ashiqur Rahman Riyan. All rights
-          reserved.
-          <i className="ml-1">
-            Developed by{" "}
-            <Link
-              className="underline"
-              to={"https://www.facebook.com/mdmahdihasan.rafi"}
-              target="_blank"
-            >
-              Rafi
-            </Link>
-          </i>
+        {/* Navigation */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-3">Quick Links</h3>
+          <ul className="space-y-2 text-sm">
+            <li><a href="/" className="hover:text-white transition">Home</a></li>
+            <li><a href="/about" className="hover:text-white transition">About</a></li>
+            <li><a href="/blog" className="hover:text-white transition">Blog</a></li>
+            <li><a href="/contact" className="hover:text-white transition">Contact</a></li>
+          </ul>
         </div>
-      </Container>
+
+        {/* Social Media */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-3">Follow Me</h3>
+          <div className="flex space-x-4">
+            <a href="#" aria-label="Facebook" className="hover:text-white transition">
+              <Facebook size={20} />
+            </a>
+            <a href="#" aria-label="Twitter" className="hover:text-white transition">
+              <Twitter size={20} />
+            </a>
+            <a href="#" aria-label="Instagram" className="hover:text-white transition">
+              <Instagram size={20} />
+            </a>
+            <a href="#" aria-label="LinkedIn" className="hover:text-white transition">
+              <Linkedin size={20} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom */}
+      <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} My Blog. All rights reserved.
       </div>
     </footer>
   );

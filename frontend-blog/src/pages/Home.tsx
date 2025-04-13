@@ -3,6 +3,7 @@ import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostCard } from "@/components/blog";
 import { TPost } from "@/interface";
+import { CardHeader, CardTitle } from "@/components/ui/card";
 
 
 export type TCategory = {
@@ -22,18 +23,28 @@ const Home = () => {
   return (
     <div>
       {/* Latest Posts */}
-      <main className="">
-        <h1 className="text-2xl font-bold">Latest Posts</h1>
+      <main className="pt-4">
+        <CardHeader className="border shadow rounded-lg">
+       <CardTitle className="text-2xl">
+        Latest Blogs
+       </CardTitle>
+        </CardHeader>
         {isLoading ? (
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-4 mt-4">
             {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-40 w-full rounded-md" />
+             
+             <div key={i} className="space-y-3">
+             <Skeleton className="h-48 w-full rounded-xl" />
+             <Skeleton className="h-5 w-3/4 rounded-md" />
+             <Skeleton className="h-4 w-1/2 rounded-md" />
+           </div>
+
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6">
-            {data?.map((post: any) => (
-              <PostCard key={post.slug} post={post} />
+          <div className="grid grid-cols-1 gap-4 mt-4">
+            { data && data?.map((post: any) => (
+              <PostCard key={post?.slug} post={post} />
             ))}
           </div>
         )}

@@ -14,8 +14,8 @@ const Navbar = () => {
   const { data } = useCategory();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b  bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container flex h-16  items-center justify-between px-4 mx-auto lg:px-8">
+    <header className="sticky top-0 z-50  w-full   bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container flex h-16 items-center justify-between px-4 mx-auto lg:px-8">
         <Link to="/" className="text-xl font-bold">
           The Learning stack
         </Link>
@@ -62,14 +62,14 @@ const Navbar = () => {
           </Sheet>
         </div>
       </div>
-      <div className="container border-b py-2 lg:hidden block mx-auto px-4 lg:px-8">
+      <div className="container border-b border-t lg:border-none py-2 static lg:hidden block mx-auto px-4 lg:px-8">
         <div className="flex overflow-x-auto items-center justify-center">
           {data?.map((cate: CType) => (
             <NavLink
               key={cate.slug}
               to={`/category/${cate.slug}`}
               className={({ isActive }) =>
-                `block px-3 py-2 rounded-md transition-colors text-sm font-medium
+                `block px-3 py-2 uppercase rounded-md transition-colors text-sm 
                            ${
                              isActive
                                ? "bg-primary text-primary-foreground"

@@ -24,15 +24,8 @@ const CategoryPage = () => {
     enabled: !!slug,
   });
 
-  if (isError)
-    return (
-      <div className="text-center text-red-500 py-10">
-        Error: {error.message}
-      </div>
-    );
-
   return (
-    <div className="grid grid-cols-1 gap-6">
+    <div className="grid grid-cols-1 gap-4 pt-4">
       {isLoading
         ? Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="space-y-3">
