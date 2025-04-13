@@ -2,6 +2,7 @@ export type TAuthor = {
 
     name: string;
     bio: string;
+    avatar?: string
 };
 
 export type TPost = {

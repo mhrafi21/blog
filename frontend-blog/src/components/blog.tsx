@@ -1,28 +1,8 @@
-// types/TPost.ts
-type TAuthor = {
-  name: string;
-  avatar: string;
-};
-
-type TPost = {
-  title: string;
-  slug: string;
-  author: TAuthor;
-  category: string;
-  category_slug: string;
-  publishDate: string;
-  tags: string[];
-  content: string;
-  readTime: string;
-};
-
-// components/PostCard.tsx
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "./ui/badge";
 import { Link } from "react-router";
+import { TPost } from "@/interface";
 
 
 type PostCardProps = {
