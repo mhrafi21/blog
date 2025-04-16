@@ -32,11 +32,12 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
           {post?.content}
         </p>
         <div className="flex gap-2 flex-wrap">
-          {post?.tags?.map((tag) => (
-            <Badge key={tag} variant="outline">
-              #{tag}
-            </Badge>
-          ))}
+          {Array.isArray(post?.tags) &&
+            post?.tags.map((tag) => (
+              <Badge key={tag} variant="outline">
+                #{tag}
+              </Badge>
+            ))}
         </div>
       </CardContent>
     </Card>

@@ -3,15 +3,17 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
 import { Card } from "@/components/ui/card";
+import { Toaster } from "@/components/ui/sonner";
 
 import React from "react";
 import { Outlet, ScrollRestoration } from "react-router"; 
+
 
 const RootLayout: React.FC = () => {
   return (
     <div>
       <ScrollRestoration />
-      <Navbar /> {/* ✅ Inserted here */}
+      <Navbar /> 
 
       <div className="grid grid-cols-1 container mx-auto px-4 lg:px-8 lg:grid-cols-12 gap-6">
         {/* Left Sidebar */}
@@ -25,6 +27,7 @@ const RootLayout: React.FC = () => {
         {/* Main Content */}
         <div className="lg:col-span-6 space-y-4">
           <Outlet />
+          <Toaster />
         </div>
 
         {/* Right Sidebar */}

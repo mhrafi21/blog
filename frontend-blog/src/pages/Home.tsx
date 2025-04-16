@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostCard } from "@/components/blog";
 import { TPost } from "@/interface";
@@ -7,10 +7,7 @@ import { CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import baseApi from "@/api/baseApi";
 import { Button } from "@/components/ui/button";
 
-export type TCategory = {
-  name: string;
-  slug: string;
-};
+
 
 const Home = () => {
   const [page, setPage] = useState(1);
@@ -23,12 +20,15 @@ const Home = () => {
       );
       return res?.data?.data; // assuming response includes { data: TPost[], totalPages: number }
     },
-    
   });
 
   const posts: TPost[] = data?.data || [];
   const totalPages: number =
     Number(Math.ceil(data?.totalData / POSTS_PER_PAGE)) || 1;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
 
   return (
     <div>

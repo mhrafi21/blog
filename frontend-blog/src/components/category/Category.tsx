@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
 import useCategory from "@/hooks/useCategory";
-import { CType } from "@/interface";
 import { Card } from "../ui/card";
+import { TCategory } from "@/interface";
 
 
 const Category: React.FC = () => {
@@ -27,7 +27,7 @@ const Category: React.FC = () => {
       ) : (
         <Card>
           <div className="h-screen">
-          {data?.map((cate: CType) => (
+          {data?.map((cate: TCategory) => (
             <NavLink
               key={cate.slug}
               to={`/category/${cate.slug}`}

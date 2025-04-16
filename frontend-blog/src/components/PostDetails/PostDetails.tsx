@@ -51,9 +51,8 @@ const PostDetails = () => {
           </div>
           <Separator className="my-4" />
           <p className="text-muted-foreground line-clamp-3 mb-3">
-          {post?.content}
-        </p>
-         
+            {post?.content}
+          </p>
 
           <Separator className="my-6" />
 
@@ -69,11 +68,12 @@ const PostDetails = () => {
                 Tags
               </h4>
               <div className="flex flex-wrap gap-2">
-                {post?.tags.map((tag) => (
-                  <Badge key={tag} variant="outline">
-                    #{tag}
-                  </Badge>
-                ))}
+                {Array.isArray(post?.tags) &&
+                  post?.tags.map((tag) => (
+                    <Badge key={tag} variant="outline">
+                      #{tag}
+                    </Badge>
+                  ))}
               </div>
             </div>
           )}

@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, NavLink } from "react-router";
 import useCategory from "@/hooks/useCategory";
-import { CType } from "@/interface";
 import ModeToggle from "./ModeToogle";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { TCategory } from "@/interface";
 
 const Navbar:React.FunctionComponent = () => {
   const [open, setOpen] = useState(false);
@@ -61,7 +61,7 @@ const Navbar:React.FunctionComponent = () => {
     </div>
     <div className="container border-b  lg:border-none  lg:hidden block mx-auto px-4 lg:px-8">
         <div className="flex items-center ">
-          {data?.map((cate: CType) => (
+          {data?.map((cate: TCategory) => (
             <NavLink
               key={cate.slug}
               to={`/category/${cate.slug}`}
