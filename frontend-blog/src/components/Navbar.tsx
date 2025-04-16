@@ -8,41 +8,40 @@ import { Link, NavLink } from "react-router";
 import useCategory from "@/hooks/useCategory";
 import { CType } from "@/interface";
 import ModeToggle from "./ModeToogle";
+import { SearchBar } from "./SearchBar/SearchBar";
 
 const Navbar:React.FunctionComponent = () => {
   const [open, setOpen] = useState(false);
   const { data } = useCategory();
 
   return (
-    <header className="sticky top-0 z-50  w-full   bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container flex h-16 items-center justify-between px-4 mx-auto lg:px-8">
+    <div>
+
+    <header className="sticky top-0 z-50 lg:border-b w-full   bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container flex h-10 items-center justify-between px-4 mx-auto lg:px-8">
         <Link to="/" className="text-xl font-bold">
           The Learning stack
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden space-x-6 lg:flex lg:items-center">
+        <nav className="hidden h-10 space-x-6 lg:flex lg:items-center">
           <NavLink to="/" className="hover:text-primary">
             Home
-          </NavLink>
-          <NavLink to="/about" className="hover:text-primary">
-            About
-          </NavLink>
-          <NavLink to="/contact" className="hover:text-primary">
-            Contact
           </NavLink>
           <ModeToggle />
         </nav>
 
         {/* Mobile Nav Toggle */}
         <div className="lg:hidden">
+          <span className="mr-2"><ModeToggle /></span>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Toggle Menu">
+              
+              <Button variant="outline" size="icon" aria-label="Toggle Menu">
                 {open ? (
                   <X className="h-6 w-6" />
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-4 w-4" />
                 )}
               </Button>
             </SheetTrigger>
@@ -51,19 +50,17 @@ const Navbar:React.FunctionComponent = () => {
                 <NavLink to="/" onClick={() => setOpen(false)}>
                   Home
                 </NavLink>
-                <NavLink to="/about" onClick={() => setOpen(false)}>
-                  About
-                </NavLink>
-                <NavLink to="/contact" onClick={() => setOpen(false)}>
-                  Contact
-                </NavLink>
               </nav>
             </SheetContent>
           </Sheet>
         </div>
       </div>
-      <div className="container border-b border-t lg:border-none py-2 static lg:hidden block mx-auto px-4 lg:px-8">
-        <div className="flex overflow-x-auto items-center justify-center">
+    </header>
+    <div className="lg:hidden block mt-1 pb-2 container mx-auto px-4 lg:px-8">
+          <SearchBar />
+    </div>
+    <div className="container border-b  lg:border-none  lg:hidden block mx-auto px-4 lg:px-8">
+        <div className="flex items-center ">
           {data?.map((cate: CType) => (
             <NavLink
               key={cate.slug}
@@ -82,7 +79,8 @@ const Navbar:React.FunctionComponent = () => {
           ))}
         </div>
       </div>
-    </header>
+    </div>
+
   );
 };
 

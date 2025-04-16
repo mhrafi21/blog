@@ -32,8 +32,8 @@ const Category: React.FC = () => {
               key={cate.slug}
               to={`/category/${cate.slug}`}
               className={({ isActive }) =>
-                `block px-3 py-3 uppercase  transition-colors text-sm
-                ${isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`
+                `block px-3 py-3 uppercase border-b transition-colors text-sm
+                ${isActive ? "bg-primary rounded-lg text-primary-foreground" : "hover:bg-muted"}`
               }
             >
               {cate.name}

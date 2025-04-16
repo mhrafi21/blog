@@ -1,9 +1,9 @@
+import baseApi from "@/api/baseApi";
 import { PostCard } from "@/components/blog";
 import NoPostFound from "@/components/NoPostFound";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TPost } from "@/interface";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 
@@ -14,8 +14,8 @@ const SearchBlog = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["blog-details", search],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:5000/api/blogs?search=${search}`
+      const res = await baseApi.get(
+        `/api/blogs?search=${search}`
       );
       return res?.data?.data?.data as TPost[];
     },

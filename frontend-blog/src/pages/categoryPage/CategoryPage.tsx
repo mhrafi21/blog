@@ -1,8 +1,8 @@
 import { PostCard } from "@/components/blog";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router";
 import { Skeleton } from "@/components/ui/skeleton";
+import baseApi from "@/api/baseApi";
 
 const CategoryPage = () => {
   const { slug } = useParams();
@@ -13,8 +13,8 @@ const CategoryPage = () => {
   } = useQuery({
     queryKey: ["categories-post", slug],
     queryFn: async () => {
-      const response = await axios.get(
-        `http://localhost:5000/api/blogs/category/${slug}`
+      const response = await baseApi.get(
+        `/api/blogs/category/${slug}`
       );
       return response?.data?.data;
     },

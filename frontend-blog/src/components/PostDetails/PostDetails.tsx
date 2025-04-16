@@ -1,11 +1,11 @@
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { TPost } from "@/interface";
-import { Card, CardDescription } from "../ui/card";
+import { Card } from "../ui/card";
+import baseApi from "@/api/baseApi";
 
 const PostDetails = () => {
   const { slug } = useParams();
@@ -13,7 +13,7 @@ const PostDetails = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["blog-details", slug],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/api/blogs/${slug}`);
+      const res = await baseApi.get(`/api/blogs/${slug}`);
       return (res?.data?.data as TPost) || {};
     },
     enabled: !!slug,
@@ -49,12 +49,11 @@ const PostDetails = () => {
               {post?.category}
             </Badge>
           </div>
-
           <Separator className="my-4" />
-
-          <div className="prose prose-gray dark:prose-invert max-w-none">
-            <CardDescription>{post?.content}</CardDescription>
-          </div>
+          <p className="text-muted-foreground line-clamp-3 mb-3">
+          {post?.content}
+        </p>
+         
 
           <Separator className="my-6" />
 
