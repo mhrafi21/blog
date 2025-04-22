@@ -1,9 +1,6 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -18,6 +15,8 @@ import { TCategory, TPost } from "@/interface";
 import useCreateBlog from "@/hooks/useCreateBlog";
 import { toast } from "sonner";
 
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 
 const AddPost = () => {
@@ -27,19 +26,22 @@ const AddPost = () => {
     handleSubmit,
     setValue,
     reset,
+    watch,
     formState: { errors },
   } = useForm<TPost>();
+
+  // inside AddPost component (ensure `setValue` and `watch` are already in useForm)
+  const content = watch("content"); // watch for content updates
 
   const { mutate: createPost, isPending } = useCreateBlog();
 
   const onSubmit = (data: TPost) => {
-    console.log(data);
+    
     const finalPost: TPost = {
       ...data,
       tags: Array.isArray(data.tags) ? data.tags : data.tags.split(",")
     };
 
-  
     createPost(finalPost, {
       onSuccess: () => {
         toast.success("Post created successfully");
@@ -50,7 +52,7 @@ const AddPost = () => {
         console.error("Create post error:", error);
       },
     });
-    reset();
+
   };
 
   const handleCategoryChange = (slug: string) => {
@@ -105,11 +107,11 @@ const AddPost = () => {
                   {isLoading && isLoading
                     ? "Loading"
                     : data &&
-                      data.map((cat: TCategory) => (
-                        <SelectItem key={cat.slug} value={cat.slug}>
-                          {cat.name}
-                        </SelectItem>
-                      ))}
+                    data.map((cat: TCategory) => (
+                      <SelectItem key={cat.slug} value={cat.slug}>
+                        {cat.name}
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
               {errors.category && (
@@ -155,18 +157,19 @@ const AddPost = () => {
 
           <div>
             <Label>Content</Label>
-            <Textarea
-              rows={10}
-              {...register("content", { required: true })}
-              placeholder={`Write your blog content here...\n\nYou can also embed images like this:\n<img src="https://example.com/image.jpg" alt="Description" />`}
+            <ReactQuill
+              theme="snow"
+              value={content || ""}
+              onChange={(value) => setValue("content", value, { shouldValidate: true })}
+              className="bg-white"
             />
             {errors.content && (
-              <p className="text-red-500 text-sm">Content is required</p>
+              <p className="text-red-500 text-sm mt-1">Content is required</p>
             )}
           </div>
 
           <Button type="submit" className="w-full">
-          {isPending ? "Add Post..." : "Add Post"}
+            {isPending ? "Add Post..." : "Add Post"}
           </Button>
         </form>
       </CardContent>

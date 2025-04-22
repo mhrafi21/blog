@@ -29,6 +29,8 @@ const PostDetails = () => {
 
   const post = data;
 
+
+
   return (
     <Card className="mt-4 p-4">
       {isLoading ? (
@@ -43,15 +45,17 @@ const PostDetails = () => {
             <h1 className="text-3xl font-bold">{post?.title}</h1>
             <div className="text-sm text-muted-foreground flex items-center gap-4">
               <span>{post?.publishDate}</span>
-              <span>• {post?.readTime} read</span>
+              <span>• {post?.readTime}</span>
             </div>
             <Badge variant="secondary" className="w-fit mt-1">
-              {post?.category}
+           {post?.category}
             </Badge>
           </div>
           <Separator className="my-4" />
-          <p className="text-muted-foreground line-clamp-3 mb-3">
-            {post?.content}
+          <p className=" mb-3"
+          dangerouslySetInnerHTML={{ __html: post?.content || "" }}
+          >
+            
           </p>
 
           <Separator className="my-6" />

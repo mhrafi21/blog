@@ -1,5 +1,5 @@
 import baseApi from "@/api/baseApi";
-import { PostCard } from "@/components/blog";
+import { PostCard } from "@/components/PostCard";
 import NoPostFound from "@/components/NoPostFound";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";

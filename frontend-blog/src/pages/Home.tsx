@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PostCard } from "@/components/blog";
+import { PostCard } from "@/components/PostCard";
 import { TPost } from "@/interface";
 import { CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import baseApi from "@/api/baseApi";
@@ -29,6 +29,8 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
+
+  console.log(posts);
 
   return (
     <div>

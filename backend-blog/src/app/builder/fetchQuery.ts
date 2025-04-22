@@ -8,6 +8,7 @@ export const fetchCourses = async (
 ) => {
     const totalData = await Blog.countDocuments(query);
     const data = await Blog.find(query)
+        .sort({ createdAt: -1 }) // Sort by createdAt in descending order
         .skip(skip)
         .limit(limit)
 
